@@ -1,0 +1,249 @@
+#include "GwPaymentRecipt.h"
+#include <QTextEdit>
+#include <QTextFrame>
+#include <QDebug>
+
+#include <QPrinter>
+#include <QPrintDialog>
+#include <QPrintPreviewDialog>
+#include <QFileDialog>
+#include <QMenuBar>
+#include <QStatusBar>
+
+GwPaymentRecipt::GwPaymentRecipt(QWidget *parent) : QMainWindow(parent)
+{
+    textEdit_ = new QTextEdit;
+    setCentralWidget(textEdit_);
+    QRect rec =  geometry();
+    setGeometry(rec.x() + 100, rec.y() + 100, 500, 300);
+    textCursor_ = textEdit_->textCursor();
+
+    auto *saveAction = new QAction("&Save");
+    saveAction->setShortcut(QKeySequence::Save);
+    saveAction->setToolTip("Save the reciept to save");
+    
+    
+    auto *printAction = new QAction(tr("&Print"));
+    printAction->setShortcut(QKeySequence::Print);
+    printAction->setToolTip("Print the reciept");
+    
+    auto *printPreviewAction = new QAction(tr("Print Preview"));
+    auto *printPdfAction = new QAction(tr("Print PDF"));
+    auto *menu = menuBar()->addMenu(tr("&File"));
+    menu->addActions(QList<QAction *>{printAction, printPreviewAction, printPdfAction});
+
+    connect(printAction, &QAction::triggered, this, &GwPaymentRecipt::filePrint);
+    connect(printPdfAction, &QAction::triggered, this, &GwPaymentRecipt::filePrintPdf);
+    connect(printPreviewAction, &QAction::triggered, this, &GwPaymentRecipt::onPrintPreview);
+}
+
+QString GwPaymentRecipt::regNum() const
+{
+    return regNum_;
+}
+
+void GwPaymentRecipt::setRegNum(const QString &regNum)
+{
+    regNum_ = regNum;
+}
+
+QString GwPaymentRecipt::fullName() const
+{
+    return fullName_;
+}
+
+void GwPaymentRecipt::setFullName(const QString &fullName)
+{
+    fullName_ = fullName;
+}
+
+double GwPaymentRecipt::amountPaid() const
+{
+    return amountPaid_;
+}
+
+void GwPaymentRecipt::setAmountPaid(double amountPaid)
+{
+    amountPaid_ = amountPaid;
+}
+
+QString GwPaymentRecipt::paymentFor() const
+{
+    return paymentFor_;
+}
+
+void GwPaymentRecipt::setPaymentFor(const QString &paymentFor)
+{
+    paymentFor_ = paymentFor;
+}
+
+QString GwPaymentRecipt::schoolName() const
+{
+    return schoolName_;
+}
+
+void GwPaymentRecipt::setSchoolName(const QString &schoolName)
+{
+    schoolName_ = schoolName;
+}
+
+void GwPaymentRecipt::onPaymentMade(const QString &regNumber, const QString &fullName, const QString &paidFor, double amountPaid)
+{
+    setRegNum(regNumber);
+    setFullName(fullName);
+    setPaymentFor(paidFor);
+    setAmountPaid(amountPaid);
+
+    createReciept();
+}
+
+void GwPaymentRecipt::onPrintPreview()
+{
+#if QT_CONFIG(printpreviewdialog)
+    QPrinter printer(QPrinter::HighResolution);
+    QPrintPreviewDialog preview(&printer, this);
+    connect(&preview, &QPrintPreviewDialog::paintRequested, this, printPreview);
+    preview.exec();
+#endif
+}
+
+void GwPaymentRecipt::printPreview(QPrinter *printer)
+{
+#ifdef QT_NO_PRINTER
+    Q_UNUSED(printer);
+#else
+    textEdit_->print(printer);
+#endif
+}
+
+void GwPaymentRecipt::filePrint()
+{
+#if QT_CONFIG(printdialog)
+    QPrinter printer(QPrinter::HighResolution);
+    QPrintDialog *dlg = new QPrintDialog(&printer, this);
+    if (textEdit_->textCursor().hasSelection())
+        dlg->addEnabledOption(QAbstractPrintDialog::PrintSelection);
+    dlg->setWindowTitle(tr("Print Document"));
+    if (dlg->exec() == QDialog::Accepted)
+        textEdit_->print(&printer);
+    delete dlg;
+#endif
+}
+
+void GwPaymentRecipt::filePrintPdf()
+{
+#ifndef QT_NO_PRINTER
+    QFileDialog fileDialog(this, tr("Export PDF"));
+    fileDialog.setAcceptMode(QFileDialog::AcceptSave);
+    fileDialog.setMimeTypeFilters(QStringList("application/pdf"));
+    fileDialog.setDefaultSuffix("pdf");
+    if (fileDialog.exec() != QDialog::Accepted)
+        return;
+    QString fileName = fileDialog.selectedFiles().first();
+    QPrinter printer(QPrinter::HighResolution);
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setOutputFileName(fileName);
+    textEdit_->document()->print(&printer);
+    statusBar()->showMessage(tr("Exported \"%1\"")
+                             .arg(QDir::toNativeSeparators(fileName)));
+#endif
+}
+
+QString GwPaymentRecipt::date() const
+{
+    return date_;
+}
+
+void GwPaymentRecipt::setDate(const QString &date)
+{
+    date_ = date;
+}
+
+QString GwPaymentRecipt::studentClass() const
+{
+    return studentClass_;
+}
+
+void GwPaymentRecipt::setStudentClass(const QString &studentClass)
+{
+    studentClass_ = studentClass;
+}
+
+void GwPaymentRecipt::createReciept()
+{
+    textCursor_.movePosition(QTextCursor::Start);
+
+    QTextFrame *topFrame = textCursor_.currentFrame();
+    QTextFrameFormat topFrameFormat = topFrame->frameFormat();
+    topFrameFormat.setLeftMargin(20);
+    topFrameFormat.setRightMargin(20);
+    topFrameFormat.setTopMargin(10);
+    topFrameFormat.setBottomMargin(10);
+    topFrame->setFrameFormat(topFrameFormat);
+
+    QTextBlockFormat blockFormat_;
+    blockFormat_.setAlignment(Qt::AlignCenter);
+
+    textCursor_.insertBlock(blockFormat_);
+
+    QTextCharFormat defaultFormat = textCursor_.blockCharFormat();
+
+    QTextCharFormat charFormat;
+    charFormat.setFontFamily("Algerian");
+    charFormat.setFontCapitalization(QFont::AllUppercase);
+    charFormat.setFontPointSize(24);
+    charFormat.setForeground(QBrush(QColor(0, 50, 0)));
+
+    textCursor_.insertText(schoolName(), charFormat);
+
+    QTextCharFormat tempFormat = defaultFormat;
+    tempFormat.setForeground(QBrush(QColor(Qt::white)));
+    tempFormat.setFontPointSize(14);
+    tempFormat.setFontItalic(true);
+    tempFormat.setBackground(Qt::black);
+
+    QTextCharFormat headerFormat = defaultFormat;
+    headerFormat.setFontPointSize(15);
+    headerFormat.setFontWeight(1);
+
+    QTextCharFormat textFormat = defaultFormat;
+    textFormat.setFontPointSize(18);
+    textFormat.setFontItalic(true);
+    textFormat.setForeground(Qt::darkBlue);
+    textFormat.setFontCapitalization(QFont::AllUppercase);
+
+
+    textCursor_.insertBlock();
+    textCursor_.insertText(tr("Temporary Reciept"), tempFormat);
+
+    QTextBlockFormat fmt = blockFormat_;
+    fmt.setAlignment(Qt::AlignLeft);
+
+    textCursor_.insertBlock(fmt);
+    textCursor_.insertText(tr("Reg. Number:  "), headerFormat);
+    textCursor_.insertText(tr("%1").arg(regNum()), textFormat);
+
+    textCursor_.insertBlock();
+    textCursor_.insertText(tr("Name:  "), headerFormat);
+    textCursor_.insertText(tr("%1").arg(fullName()), textFormat);
+
+    textCursor_.insertBlock();
+    textCursor_.insertText(tr("Class:  "), headerFormat);
+    textCursor_.insertText(tr("%1").arg(studentClass()), textFormat);
+
+    textCursor_.insertBlock();
+    textCursor_.insertText(tr("Amount Paid:  "), headerFormat);
+    textCursor_.insertText(tr("#%1").arg(amountPaid()), textFormat);
+
+    textCursor_.insertBlock();
+    textCursor_.insertText(tr("Paid For:  "), headerFormat);
+    textCursor_.insertText(tr("%1").arg(paymentFor()), textFormat);
+
+    textCursor_.insertBlock();
+    textCursor_.insertText(tr("Date:  "), headerFormat);
+    textCursor_.insertText(tr("%1").arg(date()), textFormat);
+
+    textCursor_.insertBlock();
+    textCursor_.insertText(tr("Signed: .................................  "), headerFormat);
+
+}

@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GwSortAndFilterDialog</class>
+ <widget class="QDialog" name="GwSortAndFilterDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>374</width>
+    <height>311</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Sort and Filter Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(235, 235, 235);
+color: rgb(0, 0, 0);</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_6">
+   <item row="0" column="0" colspan="2">
+    <widget class="QGroupBox" name="mainGroupBox">
+     <property name="styleSheet">
+      <string notr="true">border-top-color: rgb(250, 250, 250);</string>
+     </property>
+     <property name="title">
+      <string>Specify Sort Option</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Order</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="mainSortOrderComboBox">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(250, 250, 250);</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Ascending</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Descending</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Field (Column)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="mainSortFieldComboBox">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(250, 250, 250);</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="2" colspan="2">
+    <widget class="QGroupBox" name="filterGroupBox">
+     <property name="styleSheet">
+      <string notr="true">border-top-color: rgb(250, 250, 250);</string>
+     </property>
+     <property name="title">
+      <string>Specify Filter</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="fiterLabel">
+        <property name="text">
+         <string>Set Filter</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="filterComboBox">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(250, 250, 250);</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Value</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="filterValueComboBox">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(250, 250, 250);</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="2">
+    <widget class="QGroupBox" name="advanceGroupBox">
+     <property name="styleSheet">
+      <string notr="true">border-top-color: rgb(250, 250, 250);</string>
+     </property>
+     <property name="title">
+      <string>Additional Sort Option</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>Order</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="advanceSortOrderComboBox">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(250, 250, 250);</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Ascending</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Descending</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_8">
+        <property name="text">
+         <string>Filed (Column)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="advanceSortFieldComboBox">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(250, 250, 250);</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="2" colspan="2">
+    <widget class="QGroupBox" name="filterGroupBox_2">
+     <property name="styleSheet">
+      <string notr="true">border-top-color: rgb(250, 250, 250);</string>
+     </property>
+     <property name="title">
+      <string>Specify More Filter Options</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="0" column="0">
+       <widget class="QLabel" name="fiterLabel_2">
+        <property name="text">
+         <string>Set Filter</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="moreFilterComboBox">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(250, 250, 250);</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="moreFilterValueComboBox">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(250, 250, 250);</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Value</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="2" colspan="2">
+    <widget class="QGroupBox" name="filterGroupBox_3">
+     <property name="styleSheet">
+      <string notr="true">border-top-color: rgb(250, 250, 250);</string>
+     </property>
+     <property name="title">
+      <string>Specify More Filter Options</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="0" column="1">
+       <widget class="QComboBox" name="moreFilterComboBox_1">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(250, 250, 250);</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="fiterLabel_3">
+        <property name="text">
+         <string>Set Filter</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="moreFilterValueComboBox_1">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(250, 250, 250);</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>Value</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QPushButton" name="OkPushButton">
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(216, 216, 216);</string>
+     </property>
+     <property name="text">
+      <string>Ok</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QPushButton" name="cancelPushButton">
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(216, 216, 216);</string>
+     </property>
+     <property name="text">
+      <string>Cancel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="2">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>80</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="3" column="3">
+    <widget class="QPushButton" name="advancePushButton">
+     <property name="toolTip">
+      <string>Click for more sort and filter options</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(216, 216, 216);</string>
+     </property>
+     <property name="text">
+      <string>Advance</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

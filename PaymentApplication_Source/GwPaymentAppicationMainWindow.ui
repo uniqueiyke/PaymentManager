@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GwPaymentAppicationMainWindow</class>
+ <widget class="QMainWindow" name="GwPaymentAppicationMainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>GwPaymentAppicationMainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>400</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_File">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="actionNewPaymentManager"/>
+    <addaction name="actionOpenPaymentMaanager"/>
+    <addaction name="actionSaveChanges"/>
+   </widget>
+   <widget class="QMenu" name="menuTransaction">
+    <property name="title">
+     <string>Transaction</string>
+    </property>
+    <addaction name="actionMakePayment"/>
+    <addaction name="separator"/>
+    <addaction name="actionEditData"/>
+    <addaction name="actionSortAndFilter"/>
+   </widget>
+   <widget class="QMenu" name="menu_Help">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="actionAboutThisApp"/>
+    <addaction name="actionAboutQt"/>
+   </widget>
+   <addaction name="menu_File"/>
+   <addaction name="menuTransaction"/>
+   <addaction name="menu_Help"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionNewPaymentManager"/>
+   <addaction name="actionOpenPaymentMaanager"/>
+   <addaction name="separator"/>
+   <addaction name="actionMakePayment"/>
+   <addaction name="actionSortAndFilterMode"/>
+  </widget>
+  <action name="actionMakePayment">
+   <property name="text">
+    <string>Make Payment</string>
+   </property>
+   <property name="toolTip">
+    <string>Make a fresh Payment</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+P</string>
+   </property>
+  </action>
+  <action name="actionNewPaymentManager">
+   <property name="text">
+    <string>&amp;New Payment Manager</string>
+   </property>
+   <property name="toolTip">
+    <string>Start a New Payment Manager</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionOpenPaymentMaanager">
+   <property name="text">
+    <string>&amp;Open Payment Maanager</string>
+   </property>
+   <property name="toolTip">
+    <string>Open a  Payment Maanager</string>
+   </property>
+  </action>
+  <action name="actionEditData">
+   <property name="text">
+    <string>Edit Data</string>
+   </property>
+   <property name="toolTip">
+    <string>This Enables You to  Edit Data in some rows, column or even the entire data.
+Select the how you want the table to respond</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+   </property>
+  </action>
+  <action name="actionSaveChanges">
+   <property name="text">
+    <string>Save Changes</string>
+   </property>
+   <property name="toolTip">
+    <string>Save the changes you made in the table</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionSortAndFilter">
+   <property name="icon">
+    <iconset resource="images.qrc">
+     <normaloff>:/images/images/Filter.png</normaloff>:/images/images/Filter.png</iconset>
+   </property>
+   <property name="text">
+    <string>Sort and Filter</string>
+   </property>
+   <property name="toolTip">
+    <string>Sort and Filter data for easier viewing</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+F</string>
+   </property>
+  </action>
+  <action name="actionSortAndFilterMode">
+   <property name="icon">
+    <iconset resource="images.qrc">
+     <normaloff>:/images/images/Filter.png</normaloff>:/images/images/Filter.png</iconset>
+   </property>
+   <property name="text">
+    <string>Sort and Fiter Mode</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#000000;&quot;&gt;Table is in sort and filter mode.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#000000;&quot;&gt;Click to remove sort and filter&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionAboutThisApp">
+   <property name="text">
+    <string>About This App</string>
+   </property>
+  </action>
+  <action name="actionAboutQt">
+   <property name="text">
+    <string>About Qt</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
+ <connections/>
+</ui>

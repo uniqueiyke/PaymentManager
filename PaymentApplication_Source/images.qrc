@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>images/person_placeholder.png</file>
+        <file>images/Filter.png</file>
+        <file>images/filter-512.png</file>
+    </qresource>
+</RCC>
